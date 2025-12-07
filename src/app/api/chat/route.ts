@@ -34,7 +34,7 @@ export async function POST(req: Request) {
         });
 
         try {
-            // Attempt 1: Primary Model (High Quality)
+        try {
             console.log(
                 "Attempting Primary Model: typhoon-v2.5-30b-a3b-instruct"
             );
@@ -52,13 +52,10 @@ export async function POST(req: Request) {
             console.warn("Primary Model Failed:", primaryError);
 
             try {
-                // Attempt 2: Secondary Model (Fallback / Faster / More Stable)
                 console.log(
                     "Attempting Secondary Model: typhoon-v2.1-12b-instruct"
                 );
 
-                // Context Injection: Force System Prompt into the last User Message
-                // (Typhoon 12b sometimes ignores 'system' role, so we stick it in the user's text)
                 const fallbackMessages = [...messages];
                 const lastMsgIndex = fallbackMessages.length - 1;
                 if (
@@ -74,7 +71,7 @@ export async function POST(req: Request) {
                 const completion = await openai.chat.completions.create({
                     model: "typhoon-v2.1-12b-instruct",
                     messages: [
-                        { role: "system", content: bot.systemPrompt }, // Keep original system just in case
+                        { role: "system", content: bot.systemPrompt }, 
                         ...fallbackMessages,
                     ],
                     temperature: 0.7,
@@ -87,8 +84,6 @@ export async function POST(req: Request) {
                     secondaryError
                 );
 
-                // Attempt 3: Mock Mode (Last Resort)
-                // Simulate a short delay to make it feel natural
                 await new Promise((resolve) => setTimeout(resolve, 500));
 
                 return NextResponse.json({
