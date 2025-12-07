@@ -20,6 +20,8 @@ export const metadata: Metadata = {
     description: "Web application for simple tools and chatbot",
     icons: {
         icon: "/image/raisara.ico",
+        shortcut: "/image/raisara.ico",
+        apple: "/image/raisara.ico",
     },
 };
 
@@ -35,7 +37,7 @@ export default function RootLayout({
             >
                 <ThemeProvider
                     attribute="class"
-                    defaultTheme="system"
+                    defaultTheme="dark"
                     enableSystem
                     disableTransitionOnChange
                 >
