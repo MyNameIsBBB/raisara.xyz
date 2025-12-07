@@ -63,7 +63,11 @@ export default function ChatPage({
 
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({}));
-                throw new Error(errorData.error || "Failed to fetch response");
+                throw new Error(
+                    errorData.details ||
+                        errorData.error ||
+                        "Failed to fetch response"
+                );
             }
 
             const data = await response.json();
@@ -92,7 +96,7 @@ export default function ChatPage({
     };
 
     return (
-        <div className="container max-w-4xl mx-auto py-10 px-4 h-[calc(100vh-4rem)] flex flex-col">
+        <div className="container max-w-4xl mx-auto py-4 px-4 h-[calc(100dvh-4rem)] flex flex-col">
             <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                     <Link href="/chatbot">

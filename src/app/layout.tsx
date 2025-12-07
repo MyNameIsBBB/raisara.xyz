@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Chakra_Petch, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -23,6 +23,13 @@ export const metadata: Metadata = {
         shortcut: "/image/raisara.ico",
         apple: "/image/raisara.ico",
     },
+};
+
+export const viewport: Viewport = {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    interactiveWidget: "resizes-content",
 };
 
 export default function RootLayout({
