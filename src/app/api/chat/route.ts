@@ -56,11 +56,26 @@ export async function POST(req: Request) {
                 console.log(
                     "Attempting Secondary Model: typhoon-v2.1-12b-instruct"
                 );
+
+                // Context Injection: Force System Prompt into the last User Message
+                // (Typhoon 12b sometimes ignores 'system' role, so we stick it in the user's text)
+                const fallbackMessages = [...messages];
+                const lastMsgIndex = fallbackMessages.length - 1;
+                if (
+                    lastMsgIndex >= 0 &&
+                    fallbackMessages[lastMsgIndex].role === "user"
+                ) {
+                    fallbackMessages[lastMsgIndex] = {
+                        ...fallbackMessages[lastMsgIndex],
+                        content: `[IMPORTANT ROLE & INSTRUCTIONS: ${bot.systemPrompt}]\n\n${fallbackMessages[lastMsgIndex].content}`,
+                    };
+                }
+
                 const completion = await openai.chat.completions.create({
                     model: "typhoon-v2.1-12b-instruct",
                     messages: [
-                        { role: "system", content: bot.systemPrompt },
-                        ...messages,
+                        { role: "system", content: bot.systemPrompt }, // Keep original system just in case
+                        ...fallbackMessages,
                     ],
                     temperature: 0.7,
                     max_tokens: 1000,
