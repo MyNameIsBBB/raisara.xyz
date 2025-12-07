@@ -17,7 +17,10 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
     title: "ไร้สาระ",
-    description: "Web application for simple tools",
+    description: "Web application for simple tools and chatbot",
+    icons: {
+        icon: "/image/raisara.ico",
+    },
 };
 
 export default function RootLayout({
@@ -32,8 +35,8 @@ export default function RootLayout({
             >
                 <ThemeProvider
                     attribute="class"
-                    defaultTheme="light"
-                    enableSystem={false}
+                    defaultTheme="system"
+                    enableSystem
                     disableTransitionOnChange
                 >
                     <Navbar />

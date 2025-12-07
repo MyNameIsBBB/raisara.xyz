@@ -40,7 +40,7 @@ export default function QrCodePage() {
             </div>
 
             <div className="grid gap-8 lg:grid-cols-2 items-start">
-                <Card className="border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-white h-full">
+                <Card className="border-2 border-border shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] bg-card h-full">
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2 text-xl">
                             <LinkIcon className="w-5 h-5" />
@@ -62,7 +62,7 @@ export default function QrCodePage() {
                     </CardContent>
                 </Card>
 
-                <Card className="border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-white h-full">
+                <Card className="border-2 border-border shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] bg-card h-full">
                     <CardHeader>
                         <CardTitle className="text-xl">
                             QR Code ของคุณ
@@ -71,7 +71,7 @@ export default function QrCodePage() {
                     <CardContent className="flex flex-col items-center justify-center space-y-8 py-8">
                         <div
                             ref={qrRef}
-                            className="p-6 bg-white rounded-xl border-2 border-black shadow-sm"
+                            className="p-6 bg-white rounded-xl border-2 border-border shadow-sm"
                         >
                             {url ? (
                                 <QRCodeCanvas
@@ -90,7 +90,7 @@ export default function QrCodePage() {
                             onClick={downloadQRCode}
                             disabled={!url}
                             size="lg"
-                            className="w-full sm:w-auto min-w-[200px] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+                            className="w-full sm:w-auto min-w-[200px] border-2 border-border shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
                         >
                             <Download className="w-5 h-5 mr-2" />
                             ดาวน์โหลด QR Code

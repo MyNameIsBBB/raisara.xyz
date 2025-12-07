@@ -33,10 +33,10 @@ export default function ToolsPage() {
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                 {tools.map((tool) => (
                     <Link key={tool.href} href={tool.href} className="group">
-                        <Card className="h-full transition-all hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-white">
+                        <Card className="h-full transition-all hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] border-2 border-border shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] bg-card">
                             <CardHeader>
-                                <div className="p-3 w-fit rounded-lg bg-yellow-100 border-2 border-black mb-4 group-hover:bg-secondary transition-colors">
-                                    <tool.icon className="h-6 w-6 text-black" />
+                                <div className="p-3 w-fit rounded-lg bg-yellow-100 dark:bg-yellow-900/20 border-2 border-border mb-4 group-hover:bg-[#22c55e] transition-colors">
+                                    <tool.icon className="h-6 w-6 text-foreground group-hover:text-black" />
                                 </div>
                                 <CardTitle className="text-xl">
                                     {tool.title}

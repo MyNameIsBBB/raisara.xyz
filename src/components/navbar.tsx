@@ -19,11 +19,16 @@ export function Navbar() {
             label: "เครื่องมือ",
             active: pathname.startsWith("/tools"),
         },
+        {
+            href: "/chatbot",
+            label: "แชทบอท",
+            active: pathname === "/chatbot",
+        },
     ];
 
     return (
-        <nav className="sticky top-0 z-50 w-full border-b-2 border-black bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
-            <div className="container flex h-14 max-w-screen-2xl items-center justify-between px-4">
+        <nav className="sticky top-0 z-50 w-full border-b-2 border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
+            <div className="container flex h-14 max-w-screen-2xl items-center mx-auto justify-between px-4">
                 <div className="flex items-center gap-6">
                     <Link href="/" className="flex items-center space-x-2">
                         <span className="font-bold text-xl">ไร้สาระ</span>
