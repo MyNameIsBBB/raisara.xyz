@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ไร้สาระ (Raisara) - เว็บรวมของไร้สาระ (แต่มีประโยชน์นะเว้ย)
 
-## Getting Started
+ยินดีต้อนรับสู่ **ไร้สาระ (Raisara)** โปรเจกต์ที่เกิดจากความว่าง (มั้ง) และความอยากลองของ
+ที่นี่เรารวบรวมเครื่องมือและฟีเจอร์ต่างๆ ที่ดูเหมือนจะไร้สาระ แต่จริงๆ แล้ว... ก็อาจจะไร้สาระจริงๆ นั่นแหละ
+แต่ถ้าคุณลองเปิดใจ คุณอาจจะพบว่ามันมีประโยชน์ก็ได้นะ!
 
-First, run the development server:
+## มีอะไรบ้างในนี้?
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 1. แชทบอท (Chatbot)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+คุยกับ AI สุดกวน หรือจะคุยแบบจริงจังก็ได้ (ถ้ามันยอมคุยด้วย)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+-   **ปลาทองเพื่อนรัก**: บอทขี้ลืม ความจำสั้น คุยอะไรไปแป๊บเดียวก็ลืม เหมาะสำหรับคนเหงาที่ชอบเล่าเรื่องเดิมๆ
+-   **(Coming Soon)**: บอททวงหนี้, บอทขี้บ่น และอื่นๆ อีกมากมายที่จะตามมาหลอกหลอนคุณ
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 2. เครื่องมือ (Tools)
 
-## Learn More
+-   **QR Code Generator**: สร้าง QR Code ได้ง่ายๆ เอาไปแปะที่ไหนก็ได้ (อย่าเอาไปแปะหน้าบ้านคนอื่นก็พอ)
+-   **(Coming Soon)**: เครื่องมืออื่นๆ ที่เราจะนึกออกในอนาคต
 
-To learn more about Next.js, take a look at the following resources:
+## เทคโนโลยีที่ใช้ (สาระนิดนึง)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-   **Next.js**: เฟรมเวิร์คสุดเทพที่ใครๆ ก็ใช้
+-   **Tailwind CSS**: เขียน CSS แบบไม่ต้องคิดชื่อคลาส (แต่คลาสยาวเป็นหางว่าว)
+-   **Shadcn UI**: ยืมคอมโพเนนต์เขามาใช้ สวยแบบไม่ต้องทำเอง
+-   **OpenTyphoon API**: สมองของแชทบอท (ฉลาดกว่าคนเขียนโค้ดอีกมั้ง)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## วิธีใช้งาน (ถ้าอยากลองรันเอง)
 
-## Deploy on Vercel
+1.  Clone โปรเจกต์ไปสิ รออะไร
+    ```bash
+    git clone https://github.com/MyNameIsBBB/raisara.xyz-webapp.git
+    ```
+2.  ลง dependencies (หวังว่าจะไม่ error นะ)
+    ```bash
+    npm install
+    ```
+3.  สร้างไฟล์ `.env` แล้วใส่ API Key ซะ (ถ้าไม่มีก็ไปหามา)
+    ```env
+    TYPHOON_API_KEY=your_api_key_here
+    ```
+4.  รันเลย!
+    ```bash
+    npm run dev
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## ติดต่อเรา
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+ไม่ต้องติดต่อมาหรอก เรายุ่ง (นอนอยู่)
+แต่ถ้าเจอ Bug ก็แจ้งมาได้นะ เดี๋ยวว่างๆ (ชาติหน้า) จะมาแก้ให้
+
+---
+
+_สร้างด้วยความรัก (และความง่วง) โดย [MyNameIsBBB]_
