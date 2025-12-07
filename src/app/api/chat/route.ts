@@ -34,7 +34,6 @@ export async function POST(req: Request) {
         });
 
         try {
-        try {
             console.log(
                 "Attempting Primary Model: typhoon-v2.5-30b-a3b-instruct"
             );
@@ -71,7 +70,7 @@ export async function POST(req: Request) {
                 const completion = await openai.chat.completions.create({
                     model: "typhoon-v2.1-12b-instruct",
                     messages: [
-                        { role: "system", content: bot.systemPrompt }, 
+                        { role: "system", content: bot.systemPrompt },
                         ...fallbackMessages,
                     ],
                     temperature: 0.7,
