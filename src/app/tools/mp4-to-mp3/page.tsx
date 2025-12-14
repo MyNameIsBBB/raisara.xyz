@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { FFmpeg } from "@ffmpeg/ffmpeg";
-import { fetchFile, toBlobURL } from "@ffmpeg/util";
+// import { FFmpeg } from "@ffmpeg/ffmpeg"; // Removed static import
+// import { fetchFile, toBlobURL } from "@ffmpeg/util"; // Removed static import
+import type { FFmpeg } from "@ffmpeg/ffmpeg"; // Keep type import
 
 // Components
 import { EngineStatus } from "@/components/tools/mp4-to-mp3/engine-status";
@@ -20,24 +21,30 @@ export default function Mp4ToMp3Page() {
     const [logs, setLogs] = useState<string[]>([]);
 
     // FFmpeg instance persistence
-    const ffmpegRef = useRef(new FFmpeg());
+    const ffmpegRef = useRef<FFmpeg | null>(null);
     const messageRef = useRef<HTMLParagraphElement | null>(null);
 
     const load = async () => {
         setIsLoading(true);
         const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm";
-        const ffmpeg = ffmpegRef.current;
-
-        ffmpeg.on("log", ({ message }) => {
-            setLogs((prev) => [...prev.slice(-4), message]); // Keep last 5 lines
-            if (messageRef.current) messageRef.current.innerHTML = message;
-        });
-
-        ffmpeg.on("progress", ({ progress }) => {
-            setProgress(Math.round(progress * 100));
-        });
 
         try {
+            // Dynamic imports
+            const { FFmpeg } = await import("@ffmpeg/ffmpeg");
+            const { toBlobURL } = await import("@ffmpeg/util");
+
+            const ffmpeg = new FFmpeg();
+            ffmpegRef.current = ffmpeg;
+
+            ffmpeg.on("log", ({ message }) => {
+                setLogs((prev) => [...prev.slice(-4), message]); // Keep last 5 lines
+                if (messageRef.current) messageRef.current.innerHTML = message;
+            });
+
+            ffmpeg.on("progress", ({ progress }) => {
+                setProgress(Math.round(progress * 100));
+            });
+
             await ffmpeg.load({
                 coreURL: await toBlobURL(
                     `${baseURL}/ffmpeg-core.js`,
@@ -63,7 +70,9 @@ export default function Mp4ToMp3Page() {
         const ffmpeg = ffmpegRef.current;
 
         try {
-            if (!file) return;
+            if (!file || !ffmpeg) return;
+
+            const { fetchFile } = await import("@ffmpeg/util");
 
             await ffmpeg.writeFile("input.mp4", await fetchFile(file));
 
