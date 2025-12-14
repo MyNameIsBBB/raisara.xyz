@@ -24,6 +24,16 @@ export function Navbar() {
             label: "แชทบอท",
             active: pathname === "/chatbot",
         },
+        {
+            href: "/blog",
+            label: "บล็อก",
+            active: pathname.startsWith("/blog"),
+        },
+        {
+            href: "/report",
+            label: "แจ้งปัญหา",
+            active: pathname === "/report",
+        },
     ];
 
     return (

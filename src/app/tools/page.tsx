@@ -1,5 +1,12 @@
 import Link from "next/link";
-import { QrCode } from "lucide-react";
+import {
+    QrCode,
+    ScanLine,
+    Image,
+    Video,
+    FileAudio,
+    ImageIcon,
+} from "lucide-react";
 
 import {
     Card,
@@ -13,10 +20,29 @@ export default function ToolsPage() {
     const tools = [
         {
             title: "แปลง Link เป็น QR Code",
-            description: "สร้าง QR Code จากลิงก์เว็บไซต์ของคุณได้ง่ายๆ",
+            description: "สร้าง QR Code จากลิ้งก์เว็บไซต์ได้ง่ายๆ",
             icon: QrCode,
             href: "/tools/qrcode",
         },
+        // {
+        //     title: "แปลงรูปภาพเป็น QR Code",
+        //     description: "แปลงรูปภาพเป็น QR Code ได้ฟรี",
+        //     icon: ScanLine,
+        //     href: "/tools/qr-scanner",
+        // },
+        {
+            title: "ลบพื้นหลังรูปภาพ",
+            description: "ลบพื้นหลังรูปภาพด้วย AI ฟรี ไม่จำกัดจำนวน",
+            icon: ImageIcon,
+            href: "/tools/bg-remover",
+        },
+        // {
+        //     title: "แปลงไฟล์ MP4 เป็น MP3",
+        //     description:
+        //         "แปลงไฟล์วิดีโอเป็นเสียง ใช้งานง่าย ไม่ต้องติดตั้งโปรแกรม (Client-side)",
+        //     icon: FileAudio,
+        //     href: "/tools/mp4-to-mp3",
+        // },
     ];
 
     return (
