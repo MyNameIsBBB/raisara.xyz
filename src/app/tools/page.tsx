@@ -24,25 +24,25 @@ export default function ToolsPage() {
             icon: QrCode,
             href: "/tools/qrcode",
         },
-        // {
-        //     title: "แปลงรูปภาพเป็น QR Code",
-        //     description: "แปลงรูปภาพเป็น QR Code ได้ฟรี",
-        //     icon: ScanLine,
-        //     href: "/tools/qr-scanner",
-        // },
+        {
+            title: "แปลงรูปภาพเป็น QR Code",
+            description: "แปลงรูปภาพเป็น QR Code ได้ฟรี",
+            icon: ScanLine,
+            href: "/tools/qr-scanner",
+        },
         {
             title: "ลบพื้นหลังรูปภาพ",
             description: "ลบพื้นหลังรูปภาพด้วย AI ฟรี ไม่จำกัดจำนวน",
             icon: ImageIcon,
             href: "/tools/bg-remover",
         },
-        // {
-        //     title: "แปลงไฟล์ MP4 เป็น MP3",
-        //     description:
-        //         "แปลงไฟล์วิดีโอเป็นเสียง ใช้งานง่าย ไม่ต้องติดตั้งโปรแกรม (Client-side)",
-        //     icon: FileAudio,
-        //     href: "/tools/mp4-to-mp3",
-        // },
+        {
+            title: "แปลงไฟล์ MP4 เป็น MP3",
+            description:
+                "แปลงไฟล์วิดีโอเป็นเสียง ใช้งานง่าย ไม่ต้องติดตั้งโปรแกรม (Client-side)",
+            icon: FileAudio,
+            href: "/tools/mp4-to-mp3",
+        },
     ];
 
     return (

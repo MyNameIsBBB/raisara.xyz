@@ -34,6 +34,11 @@ export function Navbar() {
             label: "แจ้งปัญหา",
             active: pathname === "/report",
         },
+        {
+            href: "/support",
+            label: "สนับสนุน",
+            active: pathname === "/support",
+        },
     ];
 
     return (
