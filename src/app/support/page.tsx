@@ -194,9 +194,10 @@ export default function SupportPage() {
                                 <div className="w-64 h-64 bg-white p-4 rounded-xl shadow-sm border flex items-center justify-center">
                                     <div className="text-center space-y-2">
                                         <div className="w-48 h-48 bg-gray-100 rounded-lg mx-auto flex items-center justify-center border-2 border-dashed border-gray-300">
-                                            <p className="text-gray-400 text-sm">
-                                                วาง QR Code ที่นี่
-                                            </p>
+                                            <img
+                                                src="image/support.jpg"
+                                                alt="QR Code"
+                                            />
                                         </div>
                                         <p className="text-xs text-black font-mono">
                                             220-1-06094-2
