@@ -4,9 +4,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { useAuth } from "@/components/auth-provider";
 
 export function Navbar() {
     const pathname = usePathname();
+    const { isAuthenticated, user, logout } = useAuth();
 
     const routes = [
         {
@@ -35,9 +39,9 @@ export function Navbar() {
             active: pathname === "/report",
         },
         {
-            href: "/support",
-            label: "สนับสนุน",
-            active: pathname === "/support",
+            href: "/about",
+            label: "About Me",
+            active: pathname === "/about",
         },
     ];
 
@@ -57,7 +61,7 @@ export function Navbar() {
                                     "transition-colors hover:text-foreground/80",
                                     route.active
                                         ? "text-foreground"
-                                        : "text-foreground/60"
+                                        : "text-foreground/60",
                                 )}
                             >
                                 {route.label}
@@ -66,6 +70,35 @@ export function Navbar() {
                     </div>
                 </div>
                 <div className="flex items-center gap-2">
+                    {isAuthenticated ? (
+                        <>
+                            <Badge
+                                variant="secondary"
+                                className="hidden sm:inline-flex"
+                            >
+                                {user?.name}
+                            </Badge>
+                            <Button asChild variant="ghost" size="sm">
+                                <Link href="/about">Profile</Link>
+                            </Button>
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={logout}
+                            >
+                                Logout
+                            </Button>
+                        </>
+                    ) : (
+                        <>
+                            <Button asChild variant="ghost" size="sm">
+                                <Link href="/login">Login</Link>
+                            </Button>
+                            <Button asChild size="sm">
+                                <Link href="/register">Register</Link>
+                            </Button>
+                        </>
+                    )}
                     <ThemeToggle />
                 </div>
             </div>

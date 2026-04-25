@@ -10,6 +10,7 @@ import { EngineStatus } from "@/components/tools/mp4-to-mp3/engine-status";
 import { ConversionForm } from "@/components/tools/mp4-to-mp3/conversion-form";
 import { LogViewer } from "@/components/tools/mp4-to-mp3/log-viewer";
 import { ConversionResult } from "@/components/tools/mp4-to-mp3/conversion-result";
+import { ToolAccessGate } from "@/components/tool-access-gate";
 
 export default function Mp4ToMp3Page() {
     const [loaded, setLoaded] = useState(false);
@@ -48,11 +49,11 @@ export default function Mp4ToMp3Page() {
             await ffmpeg.load({
                 coreURL: await toBlobURL(
                     `${baseURL}/ffmpeg-core.js`,
-                    "text/javascript"
+                    "text/javascript",
                 ),
                 wasmURL: await toBlobURL(
                     `${baseURL}/ffmpeg-core.wasm`,
-                    "application/wasm"
+                    "application/wasm",
                 ),
             });
             setLoaded(true);
@@ -80,7 +81,7 @@ export default function Mp4ToMp3Page() {
 
             const data = await ffmpeg.readFile("output.mp3");
             const url = URL.createObjectURL(
-                new Blob([data as unknown as BlobPart], { type: "audio/mp3" })
+                new Blob([data as unknown as BlobPart], { type: "audio/mp3" }),
             );
             setMp3Url(url);
         } catch (error) {
@@ -99,42 +100,42 @@ export default function Mp4ToMp3Page() {
     };
 
     return (
-        <div className="container max-w-4xl mx-auto py-20 px-4">
-            <div className="mb-12 text-center">
-                <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4 bg-linear-to-r from-purple-500 to-pink-600 bg-clip-text text-transparent">
-                    แปลงไฟล์ MP4 เป็น MP3
-                </h1>
-                <p className="text-xl text-muted-foreground">
-                    แปลงไฟล์วิดีโอเป็นเสียงคุณภาพสูง ทำงานบนเครื่องของคุณ 100%
-                    (Client-side)
-                </p>
+        <ToolAccessGate canUseWithoutLogin={false}>
+            <div className="container max-w-4xl mx-auto py-20 px-4">
+                <div className="mb-12 text-center">
+                    <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4 bg-linear-to-r from-purple-500 to-pink-600 bg-clip-text text-transparent">
+                        แปลงไฟล์ MP4 เป็น MP3
+                    </h1>
+                    <p className="text-xl text-muted-foreground">
+                        แปลงไฟล์วิดีโอเป็นเสียงคุณภาพสูง ทำงานบนเครื่องของคุณ
+                        100% (Client-side)
+                    </p>
+                </div>
+
+                <div className="max-w-xl mx-auto space-y-8">
+                    <EngineStatus
+                        loaded={loaded}
+                        isLoading={isLoading}
+                        load={load}
+                    />
+
+                    {loaded && (
+                        <>
+                            <ConversionForm
+                                file={file}
+                                onFileSelect={handleFileSelect}
+                                convert={convert}
+                                converting={converting}
+                                progress={progress}
+                            />
+
+                            <LogViewer logs={logs} converting={converting} />
+
+                            <ConversionResult mp3Url={mp3Url} />
+                        </>
+                    )}
+                </div>
             </div>
-
-            <div className="max-w-xl mx-auto space-y-8">
-                {/* 1. Engine Loader */}
-                <EngineStatus
-                    loaded={loaded}
-                    isLoading={isLoading}
-                    load={load}
-                />
-
-                {/* 2. Main Interface (only when loaded) */}
-                {loaded && (
-                    <>
-                        <ConversionForm
-                            file={file}
-                            onFileSelect={handleFileSelect}
-                            convert={convert}
-                            converting={converting}
-                            progress={progress}
-                        />
-
-                        <LogViewer logs={logs} converting={converting} />
-
-                        <ConversionResult mp3Url={mp3Url} />
-                    </>
-                )}
-            </div>
-        </div>
+        </ToolAccessGate>
     );
 }

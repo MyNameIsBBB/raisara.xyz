@@ -5,6 +5,7 @@ import { removeBackground } from "@imgly/background-removal";
 import { AlertModal } from "@/components/ui/alert-modal";
 import { ImageUploader } from "@/components/tools/image-uploader";
 import { ImageComparison } from "@/components/tools/image-comparison";
+import { ToolAccessGate } from "@/components/tool-access-gate";
 
 export default function BgRemoverPage() {
     const [image, setImage] = useState<File | null>(null);
@@ -71,36 +72,38 @@ export default function BgRemoverPage() {
     };
 
     return (
-        <div className="container max-w-5xl mx-auto py-20 px-4">
-            <AlertModal
-                isOpen={alertOpen}
-                onClose={() => setAlertOpen(false)}
-                title={alertTitle}
-                description={alertDesc}
-            />
-            <div className="mb-8 text-center">
-                <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
-                    ลบพื้นหลังรูปภาพ
-                </h1>
-                <p className="text-xl text-muted-foreground">
-                    อัปโหลดรูปภาพของคุณเพื่อลบพื้นหลังด้วย AI ฟรี
-                </p>
-            </div>
+        <ToolAccessGate canUseWithoutLogin={false}>
+            <div className="container max-w-5xl mx-auto py-20 px-4">
+                <AlertModal
+                    isOpen={alertOpen}
+                    onClose={() => setAlertOpen(false)}
+                    title={alertTitle}
+                    description={alertDesc}
+                />
+                <div className="mb-8 text-center">
+                    <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
+                        ลบพื้นหลังรูปภาพ
+                    </h1>
+                    <p className="text-xl text-muted-foreground">
+                        อัปโหลดรูปภาพของคุณเพื่อลบพื้นหลังด้วย AI ฟรี
+                    </p>
+                </div>
 
-            <div className="max-w-2xl mx-auto">
-                {!image ? (
-                    <ImageUploader onFileSelect={processFile} />
-                ) : (
-                    <ImageComparison
-                        previewUrl={previewUrl}
-                        processedImage={processedImage}
-                        isProcessing={isProcessing}
-                        error={error}
-                        onReset={reset}
-                        onDownload={handleDownload}
-                    />
-                )}
+                <div className="max-w-2xl mx-auto">
+                    {!image ? (
+                        <ImageUploader onFileSelect={processFile} />
+                    ) : (
+                        <ImageComparison
+                            previewUrl={previewUrl}
+                            processedImage={processedImage}
+                            isProcessing={isProcessing}
+                            error={error}
+                            onReset={reset}
+                            onDownload={handleDownload}
+                        />
+                    )}
+                </div>
             </div>
-        </div>
+        </ToolAccessGate>
     );
 }

@@ -3,6 +3,7 @@ import { Chakra_Petch, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
+import { AuthProvider } from "@/components/auth-provider";
 
 const chakraPetch = Chakra_Petch({
     weight: ["300", "400", "500", "600", "700"],
@@ -47,8 +48,10 @@ export default function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 >
-                    <Navbar />
-                    <main className="flex-1">{children}</main>
+                    <AuthProvider>
+                        <Navbar />
+                        <main className="flex-1">{children}</main>
+                    </AuthProvider>
                 </ThemeProvider>
             </body>
         </html>
