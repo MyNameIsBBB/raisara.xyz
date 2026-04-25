@@ -42,78 +42,83 @@ export function MessageList({
                 </div>
             )}
 
-            {messages.map((message, index) => (
-                <div
-                    key={index}
-                    className={cn(
-                        "flex w-full",
-                        message.role === "user"
-                            ? "justify-end"
-                            : "justify-start"
-                    )}
-                >
+            {messages.map((message, index) =>
+                message.content.trim() === "" ? (
+                    isLoading && (
+                        <div key={index} className="flex justify-start w-full">
+                            <div className="flex gap-3 max-w-[80%]">
+                                <div className="w-8 h-8 rounded-full bg-muted text-muted-foreground flex items-center justify-center shrink-0 overflow-hidden">
+                                    {bot.avatar.startsWith("/") ? (
+                                        <img
+                                            src={bot.avatar}
+                                            alt={bot.name}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    ) : (
+                                        <span className="text-lg">
+                                            {bot.avatar}
+                                        </span>
+                                    )}
+                                </div>
+                                <div className="bg-muted p-3 rounded-2xl rounded-tl-none flex items-center gap-1">
+                                    <span className="w-2 h-2 bg-foreground/40 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                                    <span className="w-2 h-2 bg-foreground/40 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                                    <span className="w-2 h-2 bg-foreground/40 rounded-full animate-bounce"></span>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                ) : (
                     <div
+                        key={index}
                         className={cn(
-                            "flex gap-3 max-w-[80%]",
+                            "flex w-full",
                             message.role === "user"
-                                ? "flex-row-reverse"
-                                : "flex-row"
+                                ? "justify-end"
+                                : "justify-start",
                         )}
                     >
                         <div
                             className={cn(
-                                "w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-lg",
+                                "flex gap-3 max-w-[80%]",
                                 message.role === "user"
-                                    ? "bg-primary text-primary-foreground"
-                                    : "bg-muted text-muted-foreground"
+                                    ? "flex-row-reverse"
+                                    : "flex-row",
                             )}
                         >
-                            {message.role === "user" ? (
-                                <User className="w-5 h-5" />
-                            ) : bot.avatar.startsWith("/") ? (
-                                <img
-                                    src={bot.avatar}
-                                    alt={bot.name}
-                                    className="w-full h-full object-cover rounded-full"
-                                />
-                            ) : (
-                                bot.avatar
-                            )}
-                        </div>
-                        <div
-                            className={cn(
-                                "p-3 rounded-2xl text-sm",
-                                message.role === "user"
-                                    ? "bg-primary text-primary-foreground rounded-tr-none"
-                                    : "bg-muted text-foreground rounded-tl-none"
-                            )}
-                        >
-                            {message.content}
-                        </div>
-                    </div>
-                </div>
-            ))}
-            {isLoading && (
-                <div className="flex justify-start w-full">
-                    <div className="flex gap-3 max-w-[80%]">
-                        <div className="w-8 h-8 rounded-full bg-muted text-muted-foreground flex items-center justify-center shrink-0 overflow-hidden">
-                            {bot.avatar.startsWith("/") ? (
-                                <img
-                                    src={bot.avatar}
-                                    alt={bot.name}
-                                    className="w-full h-full object-cover"
-                                />
-                            ) : (
-                                <span className="text-lg">{bot.avatar}</span>
-                            )}
-                        </div>
-                        <div className="bg-muted p-3 rounded-2xl rounded-tl-none flex items-center gap-1">
-                            <span className="w-2 h-2 bg-foreground/40 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
-                            <span className="w-2 h-2 bg-foreground/40 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
-                            <span className="w-2 h-2 bg-foreground/40 rounded-full animate-bounce"></span>
+                            <div
+                                className={cn(
+                                    "w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-lg",
+                                    message.role === "user"
+                                        ? "bg-primary text-primary-foreground"
+                                        : "bg-muted text-muted-foreground",
+                                )}
+                            >
+                                {message.role === "user" ? (
+                                    <User className="w-5 h-5" />
+                                ) : bot.avatar.startsWith("/") ? (
+                                    <img
+                                        src={bot.avatar}
+                                        alt={bot.name}
+                                        className="w-full h-full object-cover rounded-full"
+                                    />
+                                ) : (
+                                    bot.avatar
+                                )}
+                            </div>
+                            <div
+                                className={cn(
+                                    "p-3 rounded-2xl text-sm",
+                                    message.role === "user"
+                                        ? "bg-primary text-primary-foreground rounded-tr-none"
+                                        : "bg-muted text-foreground rounded-tl-none",
+                                )}
+                            >
+                                {message.content}
+                            </div>
                         </div>
                     </div>
-                </div>
+                ),
             )}
             <div ref={messagesEndRef} />
         </div>

@@ -7,6 +7,8 @@ interface ChatInputProps {
     setInput: (value: string) => void;
     isLoading: boolean;
     onSubmit: (e: React.FormEvent) => void;
+    runtimeStatus: string;
+    runtimeProgress: number | null;
 }
 
 export function ChatInput({
@@ -14,6 +16,8 @@ export function ChatInput({
     setInput,
     isLoading,
     onSubmit,
+    runtimeStatus,
+    runtimeProgress,
 }: ChatInputProps) {
     return (
         <div className="p-4 border-t bg-background/50 backdrop-blur">
@@ -30,6 +34,11 @@ export function ChatInput({
                     <span className="sr-only">Send</span>
                 </Button>
             </form>
+            <p className="mt-2 text-xs text-muted-foreground">
+                {runtimeProgress !== null && runtimeProgress < 1
+                    ? `${runtimeStatus} (${Math.round(runtimeProgress * 100)}%)`
+                    : runtimeStatus}
+            </p>
         </div>
     );
 }

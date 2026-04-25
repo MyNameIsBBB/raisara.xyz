@@ -26,6 +26,9 @@ export default function ChatPage({
         input,
         setInput,
         isLoading,
+        runtimeStatus,
+        runtimeProgress,
+        modelId,
         messagesEndRef,
         handleSubmit,
         handleReset,
@@ -33,7 +36,11 @@ export default function ChatPage({
 
     return (
         <div className="container max-w-4xl mx-auto py-4 px-4 h-[calc(100dvh-4rem)] flex flex-col">
-            <ChatHeader bot={bot} onReset={handleReset} />
+            <ChatHeader
+                bot={bot}
+                onReset={handleReset}
+                runtimeLabel={`รันแบบ local LLM ในเบราว์เซอร์ด้วย ${modelId}`}
+            />
 
             <Card className="flex-1 flex flex-col overflow-hidden border-2">
                 <MessageList
@@ -47,6 +54,8 @@ export default function ChatPage({
                     setInput={setInput}
                     isLoading={isLoading}
                     onSubmit={handleSubmit}
+                    runtimeStatus={runtimeStatus}
+                    runtimeProgress={runtimeProgress}
                 />
             </Card>
         </div>
